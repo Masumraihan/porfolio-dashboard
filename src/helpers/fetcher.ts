@@ -28,12 +28,14 @@ const fetcher = async (url: string, options: TOptions = {}, retry = true): Promi
     ...defaultHeaders,
     ...options.headers,
   };
+
   try {
     // Make the fetch request with the provided options
     const response = await fetch(url, {
       cache: "force-cache",
       ...options,
       headers,
+      body: options.body,
     });
 
     return response?.json();

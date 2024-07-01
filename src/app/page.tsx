@@ -1,111 +1,85 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Certification from "@/components/Certification";
+import Content from "@/components/Content";
+import Experience from "@/components/Experience";
+import { MobileDisplayTabList } from "@/components/MobileDisplayTabList";
+import Profile from "@/components/Profile";
+import Project from "@/components/Project";
+import Skill from "@/components/Skill";
+import Social from "@/components/Social";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import fetcher from "@/helpers/fetcher";
+import { TProfile } from "@/types";
 
-const page = () => {
+const tablist = [
+  {
+    name: "profile",
+    label: "Profile",
+  },
+  {
+    name: "social",
+    label: "Social",
+  },
+  {
+    name: "education",
+    label: "Education",
+  },
+  {
+    name: "experience",
+    label: "Experience",
+  },
+  {
+    name: "project",
+    label: "Project",
+  },
+  {
+    name: "skill",
+    label: "Skill",
+  },
+  {
+    name: "certification",
+    label: "Certification",
+  },
+];
+const page = async () => {
+  const profile = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}`, {
+    cache: "no-store",
+  });
+  const profileData = profile?.data as TProfile;
+
   return (
     <main className='container py-[50px]'>
-      <Tabs defaultValue='general' className='w-full'>
-        <TabsList className='grid w-full grid-cols-7'>
-          <TabsTrigger value='general'>General</TabsTrigger>
-          <TabsTrigger value='social'>Social</TabsTrigger>
-          <TabsTrigger value='education'>Education</TabsTrigger>
-          <TabsTrigger value='experience'>Experience</TabsTrigger>
-          <TabsTrigger value='project'>Project</TabsTrigger>
-          <TabsTrigger value='skill'>Skill</TabsTrigger>
-          <TabsTrigger value='certification'>Certification</TabsTrigger>
+      <Tabs defaultValue='profile' className='w-full'>
+        <TabsList className='hidden lg:grid w-full lg:grid-cols-7 gap-4'>
+          {tablist.map((tab) => (
+            <TabsTrigger key={tab.name} value={tab.name}>
+              {tab.label}
+            </TabsTrigger>
+          ))}
         </TabsList>
-        <TabsContent value='general'>
-          <Card>
-            <CardHeader>
-              <CardTitle>General</CardTitle>
-              <CardDescription>Update general information about your profile.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='social'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Social</CardTitle>
-              <CardDescription>Update your social media links here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='education'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Education</CardTitle>
-              <CardDescription>Update your educational background here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='experience'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Experience</CardTitle>
-              <CardDescription>Update your work experience here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='project'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Project</CardTitle>
-              <CardDescription>Update your project details here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='skill'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Skill</CardTitle>
-              <CardDescription>Update your skill set here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value='certification'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Certification</CardTitle>
-              <CardDescription>Update your certifications here.</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-2'></CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
+        <TabsList className='lg:hidden w-full'>
+          <MobileDisplayTabList tablist={tablist} />
+        </TabsList>
+        <Content value='profile'>
+          <Profile profile={profileData} />
+        </Content>{" "}
+        <Content value='social'>
+          <Social />
+        </Content>
+        <Content value='education'>
+          <p>education</p>
+        </Content>
+        <Content value='experience'>
+          <Experience />
+        </Content>
+        <Content value='project'>
+          <Project />
+        </Content>
+        <Content value='skill'>
+          <Skill />
+        </Content>
+        <Content value='certification'>
+          <Certification />
+        </Content>
       </Tabs>
     </main>
   );
