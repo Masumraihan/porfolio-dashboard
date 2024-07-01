@@ -1,7 +1,16 @@
-const Social = () => {
+import SocialForm from "@/forms/SocialForm";
+import fetcher from "@/helpers/fetcher";
+import { TSocial } from "@/types";
+
+const Social = async () => {
+  const res = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}?filter=socialLinks`, {
+    cache: "no-store",
+  });
+  const socialLinks = res?.data as TSocial;
+
   return (
-    <div>
-      <h1>This is Social component</h1>
+    <div className='w-full'>
+      <SocialForm socialLinks={socialLinks} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import Certification from "@/components/Certification";
 import Content from "@/components/Content";
+import Education from "@/components/Education";
 import Experience from "@/components/Experience";
 import { MobileDisplayTabList } from "@/components/MobileDisplayTabList";
 import Profile from "@/components/Profile";
@@ -7,8 +8,6 @@ import Project from "@/components/Project";
 import Skill from "@/components/Skill";
 import Social from "@/components/Social";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import fetcher from "@/helpers/fetcher";
-import { TProfile } from "@/types";
 
 const tablist = [
   {
@@ -41,11 +40,6 @@ const tablist = [
   },
 ];
 const page = async () => {
-  const profile = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}`, {
-    cache: "no-store",
-  });
-  const profileData = profile?.data as TProfile;
-
   return (
     <main className='container py-[50px]'>
       <Tabs defaultValue='profile' className='w-full'>
@@ -60,13 +54,13 @@ const page = async () => {
           <MobileDisplayTabList tablist={tablist} />
         </TabsList>
         <Content value='profile'>
-          <Profile profile={profileData} />
+          <Profile />
         </Content>{" "}
         <Content value='social'>
           <Social />
         </Content>
         <Content value='education'>
-          <p>education</p>
+          <Education />
         </Content>
         <Content value='experience'>
           <Experience />
