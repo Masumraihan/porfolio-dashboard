@@ -34,6 +34,49 @@ export type TEducation = {
   gradType: string;
 };
 
+export type TExperience = {
+  id: string;
+  company: string;
+  position: string;
+  description: string;
+  responsibilities: string[];
+  startDate: string;
+  endDate: string;
+  ongoing: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TProject = {
+  id: string;
+  title: string;
+  description?: string;
+  startDate: string;
+  endDate?: string;
+  ongoing: boolean;
+  thumbnail: string;
+  images: string[];
+  isTeamProject: boolean;
+  features: string[];
+  frontendGithub?: string;
+  backendGithub?: string;
+  preview: string;
+  index: number;
+  projectTechnology: TProjectTechnology[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TProjectTechnology = {
+  id: string;
+  technologies: string[];
+  technology: keyof typeof Technology;
+  projectId: string;
+  project: TProject;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export const Degree = {
   HSC: "HSC",
   SSC: "SSC",
@@ -55,4 +98,10 @@ export const SkillLevel = {
   FAMILIAR: "FAMILIAR",
   COMFORTABLE: "COMFORTABLE",
   EXPERT: "EXPERT",
+};
+
+export const GradType = {
+  CGPA: "CGPA",
+  GPA: "GPA",
+  OTHER: "OTHER",
 };
