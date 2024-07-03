@@ -14,7 +14,7 @@ import {
 
 const Education = async () => {
   const res = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}?filter=education`, {
-    cache: "no-store",
+  next: { revalidate: 3600 },
   });
   const educationData = res?.data as TEducation[];
   return (

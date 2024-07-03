@@ -13,6 +13,7 @@ type TOptions = {
   retryMaxDelay?: number;
   retryFactor?: number;
   next?: TNextOptions;
+  mode?: "no-cors" | "cors" | "same-origin";
 };
 
 const fetcher = async (url: string, options: TOptions = {}, retry = true): Promise<any> => {

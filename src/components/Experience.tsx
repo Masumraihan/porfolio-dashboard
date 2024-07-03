@@ -13,7 +13,7 @@ import { TExperience } from "@/types";
 import fetcher from "@/helpers/fetcher";
 const Experience = async () => {
   const res = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}?filter=experience`, {
-    cache: "no-store",
+    next: { revalidate: 3600 },
   });
   const experienceData = res?.data as TExperience[];
   return (

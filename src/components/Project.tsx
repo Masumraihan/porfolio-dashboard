@@ -1,7 +1,7 @@
 import CreateProjectForm from "@/forms/CreateProjectForm";
 import fetcher from "@/helpers/fetcher";
-import { TEducation, TProject } from "@/types";
-import { EducationTable } from "./EducationTable";
+import { TProject } from "@/types";
+import { ProjectTable } from "./ProjectTable";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -11,11 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { ProjectTable } from "./ProjectTable";
 
 const Project = async () => {
   const res = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}?filter=projects`, {
-    cache: "no-store",
+    next: { revalidate: 3600 },
   });
   const projectData = res?.data as TProject[];
   return (

@@ -4,7 +4,7 @@ import { TProfile } from "@/types";
 
 const Profile = async () => {
   const profile = await fetcher(`${process.env.NEXT_PUBLIC_API_BASE_URL}`, {
-    cache: "no-store",
+    next: { revalidate: 3600 },
   });
   const profileData = profile?.data as TProfile;
   return (

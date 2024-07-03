@@ -77,6 +77,16 @@ export type TProjectTechnology = {
   updatedAt: string;
 };
 
+export type TSkill = {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  level: keyof typeof SkillLevel;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export const Degree = {
   HSC: "HSC",
   SSC: "SSC",
