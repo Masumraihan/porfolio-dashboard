@@ -1,3 +1,4 @@
+import Blog from "@/components/Blog";
 import Certification from "@/components/Certification";
 import Content from "@/components/Content";
 import Education from "@/components/Education";
@@ -38,12 +39,16 @@ const tablist = [
     name: "certification",
     label: "Certification",
   },
+  {
+    label: "Blog",
+    name: "blog",
+  },
 ];
 const page = async () => {
   return (
     <main className='container py-[50px]'>
       <Tabs defaultValue='profile' className='w-full'>
-        <TabsList className='hidden lg:grid w-full lg:grid-cols-7 gap-4'>
+        <TabsList className='hidden lg:grid w-full lg:grid-cols-8 gap-4'>
           {tablist.map((tab) => (
             <TabsTrigger key={tab.name} value={tab.name}>
               {tab.label}
@@ -73,6 +78,9 @@ const page = async () => {
         </Content>
         <Content value='certification'>
           <Certification />
+        </Content>
+        <Content value='blog'>
+          <Blog />
         </Content>
       </Tabs>
     </main>

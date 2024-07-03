@@ -22,7 +22,10 @@ const fetcher = async (url: string, options: TOptions = {}, retry = true): Promi
     "Content-Type": "application/json",
   };
 
-  defaultHeaders["Authorization"] = `mdmasumraihan1@gmail.com`;
+  //const token = localStorage.getItem("token");
+  //if (token) {
+  //  defaultHeaders["Authorization"] = `${token}`;
+  //}
 
   // Merge default headers with options.headers
   const headers = {
@@ -36,6 +39,7 @@ const fetcher = async (url: string, options: TOptions = {}, retry = true): Promi
       cache: "force-cache",
       ...options,
       headers,
+      credentials: "include",
       body: options.body,
     });
 

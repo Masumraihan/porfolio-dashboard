@@ -11,7 +11,7 @@ type TFormConfig = {
 
 type TFormInputProps = {
   children: ReactNode;
-  resolver: any;
+  resolver?: any;
   defaultValues?: Record<string, unknown>;
   className?: string;
   onSubmit: SubmitHandler<any>;
